@@ -40,16 +40,24 @@ public class LanguageModel {
         String window = "";
         char c;
         In in = new In(fileName);
+
+        // Reads just enough characters to form the first window
         for (int i = 0; i < this.windowLength; i++) {
             window += in.readChar();
         }
+        // Processes the entire text, one character at a time
         while (!in.isEmpty()) {
+            // Gets the next character
             c = in.readChar();
             if (LanguageModel.CharDataMap.get(window) == null) {
                 List probs = new List();
                 CharDataMap.put(window, probs);
             }
-            LanguageModel.CharDataMap.get(window).update(c);// just probs?
+            // Calculates the counts of the current character
+            LanguageModel.CharDataMap.get(window).update(c);
+
+            // Advances the window: adds c to the window’s end, and deletes the
+            // window's first character.
             window = window.substring(1) + c;
         }
         for (List probs : LanguageModel.CharDataMap.values()) {
