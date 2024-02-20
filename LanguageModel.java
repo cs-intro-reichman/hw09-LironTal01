@@ -5,7 +5,7 @@ public class LanguageModel {
 
     // The map of this model.
     // Maps windows to lists of charachter data objects.
-    HashMap<String, List> CharDataMap;
+    static HashMap<String, List> CharDataMap;
 
     // The window length used in this model.
     int windowLength;
