@@ -59,8 +59,8 @@ public class LanguageModel {
 
     // Returns a random character from the given probabilities list.
     public char getRandomChar(List probs) {
-        // double r = randomGenerator.nextDouble();
-        double r = Math.random();
+        double r = randomGenerator.nextDouble();
+
         for (int i = 0; i < probs.getSize(); i++) {
             if (probs.get(i).cp > r)
                 return probs.get(i).chr;
@@ -94,27 +94,4 @@ public class LanguageModel {
         return str.toString();
     }
 
-    public static void main(String[] args) {
-
-        List test = new List();
-        String str = "committee ";
-        for (int i = 0; i < str.length(); i++) {
-            test.update(str.charAt(i));
-        }
-        calculateProbabilities(test);
-        System.out.println(test.toString());
-        int[] arr = new int[test.getSize()];
-        for (int i = 0; i < 1000000; i++) {
-            char chr = getRandomChar(test);
-            arr[test.indexOf(chr)]++;
-        }
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(test.get(i).p + " ");
-        }
-        System.out.println();
-
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-    }
 }
